@@ -1,0 +1,445 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* ─────────────────────────────────────────
+   Design tokens (shared with roomcard.css)
+───────────────────────────────────────── */
+:root {
+  --rd-bg:         #06111f;
+  --rd-surface:    #0d1e35;
+  --rd-border:     rgba(200, 168, 100, 0.18);
+  --rd-gold:       #c8a864;
+  --rd-gold-light: #dfc08a;
+  --rd-text:       #e8e2d8;
+  --rd-muted:      #6e7e90;
+  --ff-serif:      'Cormorant Garamond', Georgia, serif;
+  --ff-sans:       'DM Sans', system-ui, sans-serif;
+}
+
+/* ─────────────────────────────────────────
+   Overlay
+───────────────────────────────────────── */
+.rd-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 8, 18, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: 20px;
+  animation: rd-fade-in 0.22s ease both;
+}
+
+@keyframes rd-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─────────────────────────────────────────
+   Modal
+───────────────────────────────────────── */
+.rd-modal {
+  background: var(--rd-surface);
+  border: 1px solid var(--rd-border);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 720px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 50px 120px rgba(0,0,0,0.75), 0 0 0 1px rgba(200,168,100,0.12);
+  animation: rd-slide-up 0.38s cubic-bezier(0.16,1,0.3,1) both;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.rd-modal::-webkit-scrollbar { display: none; }
+
+@keyframes rd-slide-up {
+  from { transform: translateY(28px) scale(0.98); opacity: 0; }
+  to   { transform: translateY(0) scale(1);       opacity: 1; }
+}
+
+/* ─────────────────────────────────────────
+   Close button
+───────────────────────────────────────── */
+.rd-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 20;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(6,17,31,0.75);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 50%;
+  color: rgba(232,226,216,0.7);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  backdrop-filter: blur(8px);
+}
+
+.rd-close:hover {
+  color: var(--rd-gold);
+  border-color: rgba(200,168,100,0.45);
+  background: rgba(200,168,100,0.1);
+}
+
+/* ─────────────────────────────────────────
+   Gallery / Swiper
+───────────────────────────────────────── */
+.rd__gallery {
+  position: relative;
+  height: 340px;
+  overflow: hidden;
+  background: var(--rd-bg);
+}
+
+/* Swiper fills the gallery box */
+.rd__swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.rd__swiper .swiper-wrapper,
+.rd__swiper .swiper-slide {
+  height: 100%;
+}
+
+.rd__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Bottom gradient for text legibility */
+.rd__gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+  background: linear-gradient(to top, rgba(6,17,31,0.88) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* ── Swiper navigation — hairline chevron ── */
+.rd__swiper .swiper-button-prev,
+.rd__swiper .swiper-button-next {
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: none;
+  color: rgba(232,226,216,0.55);
+  font-size: 0;
+  margin-top: -14px;
+  transition: color 0.2s ease;
+  z-index: 10;
+}
+
+.rd__swiper .swiper-button-prev:hover,
+.rd__swiper .swiper-button-next:hover {
+  color: var(--rd-gold);
+}
+
+.rd__swiper .swiper-button-prev::after,
+.rd__swiper .swiper-button-next::after {
+  content: '';
+  display: block;
+  width: 9px;
+  height: 9px;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  transition: border-color 0.2s;
+}
+
+.rd__swiper .swiper-button-prev::after {
+  transform: rotate(-135deg) translateX(-1px);
+}
+
+.rd__swiper .swiper-button-next::after {
+  transform: rotate(45deg) translateX(-1px);
+}
+
+/* ── Fraction pagination ── */
+.rd__swiper .swiper-pagination {
+  bottom: 14px;
+  z-index: 10;
+}
+
+.rd__swiper .swiper-pagination-fraction {
+  font-family: var(--ff-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: rgba(232,226,216,0.7);
+}
+
+.rd__swiper .swiper-pagination-current {
+  color: var(--rd-gold);
+  font-weight: 500;
+}
+
+/* ── Price card (bottom-left, above gradient) ── */
+.rd__price-card {
+  position: absolute;
+  bottom: 24px;
+  left: 28px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rd__price-amount {
+  font-family: var(--ff-serif);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--rd-gold);
+  line-height: 1;
+}
+
+.rd__price-unit {
+  font-family: var(--ff-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(232,226,216,0.5);
+}
+
+/* ── Status pill ── */
+.rd__status-pill {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 10;
+  font-family: var(--ff-sans);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+}
+
+.rd__status-pill--available {
+  background: rgba(40,130,90,0.75);
+  color: #c4f0db;
+  border: 1px solid rgba(60,200,130,0.3);
+}
+
+.rd__status-pill--booked,
+.rd__status-pill--occupied {
+  background: rgba(160,60,60,0.75);
+  color: #fdd;
+  border: 1px solid rgba(220,80,80,0.3);
+}
+
+.rd__status-pill--maintenance {
+  background: rgba(160,120,40,0.75);
+  color: #fef3c7;
+  border: 1px solid rgba(220,160,40,0.3);
+}
+
+/* ─────────────────────────────────────────
+   Body
+───────────────────────────────────────── */
+.rd__body {
+  padding: 32px 36px 40px;
+}
+
+/* ── Header ── */
+.rd__eyebrow {
+  font-family: var(--ff-sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rd-gold);
+  margin: 0 0 8px;
+}
+
+.rd__title {
+  font-family: var(--ff-serif);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--rd-text);
+  margin: 0;
+  line-height: 1.15;
+}
+
+/* ── Divider ── */
+.rd__divider {
+  height: 1px;
+  background: linear-gradient(to right, rgba(200,168,100,0.25), transparent);
+  margin: 22px 0;
+}
+
+/* ── Description ── */
+.rd__desc {
+  font-family: var(--ff-sans);
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: var(--rd-muted);
+  line-height: 1.8;
+  margin: 0 0 28px;
+}
+
+/* ── Quick stats row ── */
+.rd__stats {
+  display: flex;
+  gap: 0;
+  margin-bottom: 28px;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.rd__stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.025);
+  border-right: 1px solid rgba(255,255,255,0.07);
+}
+
+.rd__stat:last-child {
+  border-right: none;
+}
+
+.rd__stat-label {
+  font-family: var(--ff-sans);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rd-muted);
+}
+
+.rd__stat-value {
+  font-family: var(--ff-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--rd-text);
+  line-height: 1;
+}
+
+/* ── Amenities ── */
+.rd__section-label {
+  font-family: var(--ff-sans);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rd-muted);
+  margin: 0 0 12px;
+}
+
+.rd__amenities {
+  list-style: none;
+  margin: 0 0 32px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 8px;
+}
+
+.rd__amenity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--ff-sans);
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: rgba(232,226,216,0.75);
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 3px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.rd__amenity svg {
+  color: var(--rd-gold);
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.rd__amenity:hover {
+  border-color: rgba(200,168,100,0.25);
+  background: rgba(200,168,100,0.04);
+}
+
+/* ─────────────────────────────────────────
+   Book button
+───────────────────────────────────────── */
+.rd__book-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px;
+  background: var(--rd-gold);
+  border: none;
+  border-radius: 4px;
+  color: #06111f;
+  font-family: var(--ff-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s, box-shadow 0.25s, transform 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+
+.rd__book-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.rd__book-btn:hover {
+  background: var(--rd-gold-light, #dfc08a);
+  box-shadow: 0 8px 28px rgba(200,168,100,0.35);
+}
+
+.rd__book-btn:hover::before {
+  transform: translateX(100%);
+}
+
+.rd__book-btn:active {
+  transform: scale(0.99);
+}
+
+.rd__book-btn svg {
+  transition: transform 0.2s;
+}
+
+.rd__book-btn:hover svg {
+  transform: translateX(4px);
+}
+
+/* ─────────────────────────────────────────
+   Responsive
+───────────────────────────────────────── */
+@media (max-width: 520px) {
+  .rd__gallery { height: 260px; }
+  .rd__body { padding: 24px 20px 32px; }
+  .rd__title { font-size: 1.6rem; }
+  .rd__stats { flex-direction: column; }
+  .rd__stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .rd__stat:last-child { border-bottom: none; }
+  .rd__amenities { grid-template-columns: 1fr 1fr; }
+}

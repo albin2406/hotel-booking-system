@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Jost:wght@300;400;500&display=swap');
+
+.rooms-section {
+  background: #07111e;
+  padding: 100px 60px;
+}
+
+.rooms-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.rooms-tag {
+  display: inline-block;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #c8a55a;
+  margin-bottom: 14px;
+}
+
+.rooms-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 400;
+  color: #f0ece4;
+  margin: 0;
+}
+
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .rooms-section { padding: 60px 20px; }
+  .rooms-grid { grid-template-columns: 1fr; }
+}

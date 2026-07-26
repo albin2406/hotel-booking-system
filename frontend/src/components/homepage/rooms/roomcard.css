@@ -1,0 +1,323 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* ─────────────────────────────────────────
+   Design tokens
+───────────────────────────────────────── */
+:root {
+  --rc-bg:         #0a1628;
+  --rc-surface:    #0f2040;
+  --rc-border:     rgba(200, 168, 100, 0.18);
+  --rc-gold:       #c8a864;
+  --rc-gold-light: #dfc08a;
+  --rc-text:       #e8e2d8;
+  --rc-muted:      #6e7e90;
+  --rc-dim:        rgba(255,255,255,0.06);
+  --rc-radius:     6px;
+  --ff-serif:      'Cormorant Garamond', Georgia, serif;
+  --ff-sans:       'DM Sans', system-ui, sans-serif;
+}
+
+/* ─────────────────────────────────────────
+   Card shell
+───────────────────────────────────────── */
+.rc {
+  background: var(--rc-surface);
+  border: 1px solid var(--rc-border);
+  border-radius: var(--rc-radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1),
+              box-shadow 0.35s ease,
+              border-color 0.3s ease;
+}
+
+.rc:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(200,168,100,0.25);
+  border-color: rgba(200,168,100,0.35);
+}
+
+/* ─────────────────────────────────────────
+   Gallery + Swiper
+───────────────────────────────────────── */
+.rc__gallery {
+  position: relative;
+  height: 230px;
+  overflow: hidden;
+  background: var(--rc-bg);
+}
+
+/* Make Swiper fill the wrapper completely */
+.rc__swiper {
+  width: 100%;
+  height: 100%;
+}
+
+/* Ensure slides and images fill properly */
+.rc__swiper .swiper-wrapper,
+.rc__swiper .swiper-slide {
+  height: 100%;
+}
+
+.rc__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Swiper navigation — invisible edge tap zones ── */
+.rc__swiper .swiper-button-prev,
+.rc__swiper .swiper-button-next {
+  width: 30%;
+  height: 100%;
+  top: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  color: transparent;
+}
+
+.rc__swiper .swiper-button-prev { left: 0; }
+.rc__swiper .swiper-button-next { right: 0; }
+
+.rc__swiper .swiper-button-prev::after,
+.rc__swiper .swiper-button-next::after {
+  content: '';
+}
+
+/* ── Swiper pagination dots ── */
+.rc__swiper .swiper-pagination {
+  bottom: 10px;
+}
+
+.rc__swiper .swiper-pagination-bullet {
+  width: 5px;
+  height: 5px;
+  background: rgba(255,255,255,0.35);
+  opacity: 1;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.rc__swiper .swiper-pagination-bullet-active {
+  background: var(--rc-gold);
+  transform: scale(1.4);
+}
+
+/* ── Status ribbon (top-left) ── */
+.rc__status {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  z-index: 10;
+  font-family: var(--ff-sans);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 4px 12px 4px 14px;
+  border-radius: 0 2px 2px 0;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 6px) 50%, 100% 100%, 0 100%);
+  padding-right: 18px;
+}
+
+.rc__status--available {
+  background: rgba(74,168,120,0.85);
+  color: #d4f5e5;
+}
+
+.rc__status--booked,
+.rc__status--occupied {
+  background: rgba(180,80,80,0.85);
+  color: #fde8e8;
+}
+
+.rc__status--maintenance {
+  background: rgba(180,140,60,0.85);
+  color: #fef3d0;
+}
+
+/* ── Price badge (bottom-right) ── */
+.rc__price {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  z-index: 10;
+  background: rgba(8,18,36,0.82);
+  border: 1px solid rgba(200,168,100,0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 3px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+}
+
+.rc__price-amount {
+  font-family: var(--ff-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--rc-gold);
+  line-height: 1;
+}
+
+.rc__price-unit {
+  font-family: var(--ff-sans);
+  font-size: 0.68rem;
+  color: var(--rc-muted);
+}
+
+/* ─────────────────────────────────────────
+   Body
+───────────────────────────────────────── */
+.rc__body {
+  padding: 22px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* ── Header row ── */
+.rc__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.rc__room-no {
+  font-family: var(--ff-sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rc-gold);
+  margin: 0 0 4px;
+}
+
+.rc__type {
+  font-family: var(--ff-serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--rc-text);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.rc__guests {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--ff-sans);
+  font-size: 0.75rem;
+  color: var(--rc-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.rc__guests svg {
+  opacity: 0.6;
+}
+
+/* ── Description ── */
+.rc__desc {
+  font-family: var(--ff-sans);
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--rc-muted);
+  line-height: 1.7;
+  margin: 0 0 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Amenity pills ── */
+.rc__amenities {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.rc__amenity {
+  font-family: var(--ff-sans);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(200,168,100,0.85);
+  border: 1px solid rgba(200,168,100,0.2);
+  background: rgba(200,168,100,0.05);
+  padding: 4px 10px;
+  border-radius: 2px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.rc:hover .rc__amenity {
+  border-color: rgba(200,168,100,0.35);
+  background: rgba(200,168,100,0.08);
+}
+
+.rc__amenity--more {
+  color: var(--rc-muted);
+  border-color: rgba(255,255,255,0.1);
+  background: transparent;
+}
+
+/* ── CTA button ── */
+.rc__btn {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid rgba(200,168,100,0.35);
+  color: var(--rc-gold);
+  font-family: var(--ff-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 11px 22px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.rc__btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(200,168,100,0.08), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+}
+
+.rc__btn:hover {
+  background: rgba(200,168,100,0.1);
+  border-color: var(--rc-gold);
+  box-shadow: 0 0 20px rgba(200,168,100,0.1);
+}
+
+.rc__btn:hover::before {
+  transform: translateX(100%);
+}
+
+.rc__btn svg {
+  transition: transform 0.2s;
+}
+
+.rc__btn:hover svg {
+  transform: translateX(3px);
+}

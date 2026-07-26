@@ -1,0 +1,29 @@
+.registerPage{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#f4f4f4;
+}
+
+.registerBox{
+    background:white;
+    padding:40px;
+    width:350px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    border-radius:10px;
+}
+
+.registerBox input{
+    padding:10px;
+    border:1px solid #ccc;
+}
+
+.registerBox button{
+    padding:10px;
+    background:#1e40af;
+    color:white;
+    border:none;
+}

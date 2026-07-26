@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Jost:wght@300;400;500&display=swap');
+
+/* ── Base ── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 72px;
+  background: #0b1a2e;
+  border-bottom: 1px solid rgba(200, 165, 90, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+/* ── Logo ── */
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #c8a55a;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ── Desktop Nav ── */
+.nav {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav li {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #d0ccc4;
+  cursor: pointer;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.nav li:hover { color: #c8a55a; }
+
+/* ── Desktop Auth ── */
+.auth {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.welcome {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.82rem;
+  color: #8a9aaa;
+  white-space: nowrap;
+}
+
+.auth button {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.25s;
+  white-space: nowrap;
+}
+
+.login-btn {
+  background: transparent;
+  border: 1px solid rgba(200, 165, 90, 0.5);
+  color: #c8a55a;
+}
+
+.login-btn:hover {
+  background: rgba(200, 165, 90, 0.1);
+  border-color: #c8a55a;
+}
+
+.register-btn {
+  background: #c8a55a;
+  border: 1px solid #c8a55a;
+  color: #0b1a2e;
+  font-weight: 500;
+}
+
+.register-btn:hover { background: #dbb96e; border-color: #dbb96e; }
+
+.logout {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #d0ccc4;
+}
+
+.logout:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+/* ── Hamburger ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: 1px solid rgba(200, 165, 90, 0.25);
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 6px 8px;
+  transition: border-color 0.2s;
+  flex-shrink: 0;
+}
+
+.hamburger:hover { border-color: rgba(200, 165, 90, 0.6); }
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: #c8a55a;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+
+/* Animate to X */
+.hamburger--open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger--open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger--open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ── Mobile Drawer ── */
+.mobile-drawer {
+  position: fixed;
+  top: 72px;
+  left: 0;
+  right: 0;
+  background: #0d1f35;
+  border-bottom: 1px solid rgba(200, 165, 90, 0.2);
+  z-index: 190;
+  padding: 0 28px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              padding 0.35s ease;
+}
+
+.mobile-drawer--open {
+  max-height: 420px;
+  padding: 24px 28px 28px;
+}
+
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.mobile-nav a {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.88rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #d0ccc4;
+  padding: 10px 0;
+  cursor: pointer;
+  transition: color 0.2s;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.mobile-nav a:last-child { border-bottom: none; }
+.mobile-nav a:hover { color: #c8a55a; }
+
+.mobile-auth {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobile-welcome {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.82rem;
+  color: #6a7a8a;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.mobile-login-btn,
+.mobile-register-btn,
+.mobile-logout {
+  width: 100%;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 12px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mobile-login-btn {
+  background: transparent;
+  border: 1px solid rgba(200, 165, 90, 0.4);
+  color: #c8a55a;
+}
+
+.mobile-login-btn:hover { background: rgba(200, 165, 90, 0.08); }
+
+.mobile-register-btn {
+  background: #c8a55a;
+  border: 1px solid #c8a55a;
+  color: #0b1a2e;
+  font-weight: 500;
+}
+
+.mobile-register-btn:hover { background: #dbb96e; }
+
+.mobile-logout {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #d0ccc4;
+}
+
+.mobile-logout:hover { border-color: rgba(255, 255, 255, 0.35); color: #fff; }
+
+/* ── Overlay ── */
+.drawer-overlay {
+  position: fixed;
+  inset: 72px 0 0 0;
+  background: rgba(4, 10, 20, 0.5);
+  z-index: 180;
+  backdrop-filter: blur(2px);
+}
+
+/* ── Responsive breakpoints ── */
+@media (max-width: 900px) {
+  .nav { gap: 20px; }
+  .header { padding: 0 28px; }
+}
+
+@media (max-width: 768px) {
+  .nav,
+  .auth { display: none; }
+  .hamburger { display: flex; }
+  .header { padding: 0 24px; }
+}
+
+@media (max-width: 400px) {
+  .logo { font-size: 1.3rem; }
+  .header { padding: 0 16px; }
+  .mobile-drawer { padding-left: 20px; padding-right: 20px; }
+}
