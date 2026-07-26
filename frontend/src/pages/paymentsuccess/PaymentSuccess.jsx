@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import './paymentsuccess'
 import API from "../../services/api.js";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import "./paymentsuccess.css";
